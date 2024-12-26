@@ -10,4 +10,5 @@ class RoutesConstants {
   static const String bookingDetailsScreen = '/bookingDetails';
   static const String favoriteScreen = '/favorite';  
   static const String addCar = '/addCar';
+  static const String carsList = '/carsList'; 
 }
