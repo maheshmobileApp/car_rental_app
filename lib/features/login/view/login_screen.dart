@@ -1,3 +1,5 @@
+import 'package:car_rental_app/routes/routes_constants.dart';
+import 'package:car_rental_app/services/navigation_services.dart';
 import 'package:car_rental_app/widget/button_widget.dart';
 import 'package:car_rental_app/widget/input_text_field_widget.dart';
 import 'package:car_rental_app/widget/logo_widget.dart';
@@ -68,7 +70,11 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const Text("Don't have an account?"),
                 TextButtonWidget(
-                    buttonTitle: "Sign Up", onPressed: () {}),
+                    buttonTitle: "Sign Up",
+                    onPressed: () {
+                      NavigationServices()
+                          .navigateTo(RoutesConstants.signUpScreen);
+                    }),
               ],
             ) 
         
