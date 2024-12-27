@@ -1,4 +1,7 @@
+import 'package:car_rental_app/features/cars/repository/car_repository_impl.dart';
 import 'package:car_rental_app/features/cars/view_model/cars_view_model.dart';
+import 'package:car_rental_app/features/signup/repository/sign_up_repository_impl.dart';
+import 'package:car_rental_app/features/signup/view_model/sign_up_view_model.dart';
 import 'package:car_rental_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +29,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => CarsViewModel()),
+        ChangeNotifierProvider(
+            create: (_) => CarsViewModel(repository: CarRepositoryImpl())),
+        ChangeNotifierProvider(
+            create: (_) => SignUpViewModel(repository: SignUpRepositoryImpl()))   
       ],
      
       child: MaterialApp.router(

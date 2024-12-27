@@ -1,19 +1,20 @@
 import 'package:car_rental_app/features/cars/model/cars_model.dart';
+import 'package:car_rental_app/features/cars/repository/car_repository.dart';
 import 'package:car_rental_app/utils/loader_utils.dart';
-import 'package:car_rental_app/utils/server_constants.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
 
 class CarsViewModel extends ChangeNotifier {
   List<Cars> cars = [];
-  Future<void> getCars() async {
-    const url = ServerConstants.baseUrl + ServerConstants.getAllCars;
-    final dioObject = Dio();
+  CarRepository repository;
+  CarsViewModel({required this.repository});
 
+  //Api Serice
+  //Repos -> abstract -> imple
+
+  Future<void> getCars() async {
     try {
       LoaderWidget.showLoader();
-      final response = await dioObject.get(url);
+      final response = await repository.getCarsList();
       LoaderWidget.hideLoader();
       if (response.statusCode == 200) {
         final carsModel = CarsModelData.fromJson(response.data);
@@ -23,10 +24,12 @@ class CarsViewModel extends ChangeNotifier {
       LoaderWidget.hideLoader();
       cars = [];
     } finally {
- 
       notifyListeners();
     }
 
 //api/cars
   }
 }
+
+// view -> VM - > dio -> call 
+// view- > VM -> repository -> Apiservice 
