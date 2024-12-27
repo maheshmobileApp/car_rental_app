@@ -1,7 +1,9 @@
 import 'package:car_rental_app/features/cars/model/cars_model.dart';
+import 'package:car_rental_app/utils/loader_utils.dart';
 import 'package:car_rental_app/utils/server_constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+
 
 class CarsViewModel extends ChangeNotifier {
   List<Cars> cars = [];
@@ -10,14 +12,18 @@ class CarsViewModel extends ChangeNotifier {
     final dioObject = Dio();
 
     try {
+      LoaderWidget.showLoader();
       final response = await dioObject.get(url);
+      LoaderWidget.hideLoader();
       if (response.statusCode == 200) {
         final carsModel = CarsModelData.fromJson(response.data);
         cars = carsModel.cars ?? [];
       }
     } catch (e) {
+      LoaderWidget.hideLoader();
       cars = [];
     } finally {
+ 
       notifyListeners();
     }
 

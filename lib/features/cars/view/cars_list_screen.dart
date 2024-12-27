@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:car_rental_app/features/cars/view_model/cars_view_model.dart';
 import 'package:car_rental_app/widget/cars_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +18,15 @@ class _CarsListScreenState extends State<CarsListScreen> {
     final carsViewModel = Provider.of<CarsViewModel>(context);
 
     return  Scaffold(
-      appBar: AppBar(title:const Text("Cars List") ,),
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: const Text("Cars List"),
+          backgroundColor: Colors.white,
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          child:const Icon(Icons.add),
+          onPressed: () {}),
         body: ListView.builder(
           itemBuilder: (context, index) {
             final carData = carsViewModel.cars[index];

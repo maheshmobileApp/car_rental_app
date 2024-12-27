@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: ButtonWidget(
                   buttonTitle: "Login",
                   onPressed: () {
-                    NavigationServices().navigateTo(RoutesConstants.homeScreen);
+                    NavigationServices().replaceAll(RoutesConstants.homeScreen);
                   }),
             ),
             Row(
@@ -100,3 +100,5 @@ login button
 Signup button
 
  */
+
+// home

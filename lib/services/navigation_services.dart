@@ -24,6 +24,10 @@ class NavigationServices {
     AppRouter.router.replace(routeName);
   }
 
+  void replaceAll(String routeName){
+     AppRouter.router.go(routeName);
+  }
+
   // navition push
   // pop
   // push with paramerters

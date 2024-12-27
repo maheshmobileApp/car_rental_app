@@ -2,8 +2,20 @@ import 'package:car_rental_app/features/cars/view_model/cars_view_model.dart';
 import 'package:car_rental_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 void main() {
+    configLoading();
   runApp(const MyApp());
+
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..indicatorType = EasyLoadingIndicatorType.circle
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..maskType = EasyLoadingMaskType.black
+    ..indicatorSize = 45.0
+    ..radius = 10.0;
 }
 
 class MyApp extends StatelessWidget {
@@ -16,6 +28,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => CarsViewModel()),
       ],
+     
       child: MaterialApp.router(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -39,6 +52,7 @@ class MyApp extends StatelessWidget {
           
         ),
         routerConfig: AppRouter.router,
+         builder: EasyLoading.init(),
         
       ),
     );
