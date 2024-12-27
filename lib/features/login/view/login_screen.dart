@@ -63,7 +63,11 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ButtonWidget(buttonTitle: "Login", onPressed: () {}),
+              child: ButtonWidget(
+                  buttonTitle: "Login",
+                  onPressed: () {
+                    NavigationServices().navigateTo(RoutesConstants.homeScreen);
+                  }),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
