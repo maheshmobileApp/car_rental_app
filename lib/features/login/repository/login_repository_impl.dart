@@ -1,11 +1,13 @@
 import 'package:car_rental_app/features/login/repository/login_repository.dart';
+import 'package:car_rental_app/services/api_services.dart';
+import 'package:car_rental_app/utils/server_constants.dart';
 
 class LoginRepositoryImpl  extends LoginRepository{
+  final _apiServices = ApiServices();
   @override
-  Future<String> login(String username, String password) {
-    // TODO: implement login
-    //Repositry connected to web service
-    throw UnimplementedError();
+  Future<dynamic> login(payload) {
+    return _apiServices.postCall(ServerConstants.signIn, payload);
   }
+  
 
 }
