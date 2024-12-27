@@ -17,7 +17,7 @@ static final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorSt
 
 static final GoRouter router = GoRouter(
   navigatorKey: _rootNavigatorKey,
-      initialLocation: RoutesConstants.splashScreen,
+      initialLocation: RoutesConstants.addCar,
   routes: <RouteBase>[
     GoRoute(
       path: RoutesConstants.splashScreen,
