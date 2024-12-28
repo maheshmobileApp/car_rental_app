@@ -1,14 +1,20 @@
 import 'dart:io';
 
+import 'package:car_rental_app/features/add_car/model/addcar_request_model.dart';
 import 'package:car_rental_app/features/add_car/view_model/add_car_view_model.dart';
+import 'package:car_rental_app/features/cars/view_model/cars_view_model.dart';
+import 'package:car_rental_app/services/navigation_services.dart';
+import 'package:car_rental_app/utils/loader_utils.dart';
 import 'package:car_rental_app/widget/button_widget.dart';
 import 'package:car_rental_app/widget/dropdown_widget.dart';
 import 'package:car_rental_app/widget/input_text_field_widget.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
+
 class AddCarScreen extends StatefulWidget {
-  const AddCarScreen({ Key? key }) : super(key: key);
+  const AddCarScreen({Key? key}) : super(key: key);
 
   @override
   _AddCarScreenState createState() => _AddCarScreenState();
@@ -106,7 +112,11 @@ class _AddCarScreenState extends State<AddCarScreen> {
                 height: 10,
               ),
               ButtonWidget(
-                  buttonWidth: 300, buttonTitle: "Add Car", onPressed: () {})
+                  buttonWidth: 300,
+                  buttonTitle: "Add Car",
+                  onPressed: () {
+                    addCarToServer(viewModel);
+                  })
             ],
           ),
         ),
@@ -174,6 +184,28 @@ class _AddCarScreenState extends State<AddCarScreen> {
     final ImagePicker picker = ImagePicker();
     XFile? file = await picker.pickImage(source: soure, imageQuality: 20);
     viewModel.setSelectedImage(file);
+  }
+
+  void addCarToServer(AddCarViewModel model) async {
+    final AddCarRequestModel addCarRequestModel = AddCarRequestModel(
+        name: _nameTextController.text,
+        brand: _brandTextController.text,
+        year: "${model.selectedYear ?? 0}",
+        fuelType: model.selectedFuelType ?? "",
+        transmission: model.selectedTransmission ?? "",
+        address: _addressController.text,
+        pricePerDay: _priceTextController.text,
+        description: _descriptionTextController.text,
+        imagePath:
+            await MultipartFile.fromFile(model.selectedImage?.path ?? ""));
+    LoaderWidget.showLoader();
+    final response = await model.addCar(addCarRequestModel);
+    LoaderWidget.hideLoader();
+
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(response.message ?? "")));
+  //Call the getCars method of the CarsViewModel
+    NavigationServices().goBack(); //Go back to the previous screen
   }
 }
 
