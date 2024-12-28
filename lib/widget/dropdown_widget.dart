@@ -1,3 +1,4 @@
+import 'package:car_rental_app/utils/colors_constants.dart';
 import 'package:flutter/material.dart';
 
 class DropdownWidget<T> extends StatelessWidget {
@@ -13,17 +14,26 @@ class DropdownWidget<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<T>(
-      value: defaultValue,
-      items: items.map((T item) {
-        return DropdownMenuItem<T>(
-          value: item,
-          child: Text(item.toString()),
-        );
-      }).toList(),
-      onChanged: (T? value) {
-        selectedValue(value ?? defaultValue);
-      },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      child: DropdownButtonFormField<T>(
+        value: defaultValue,
+        decoration: const InputDecoration(
+          // labelText: 'Choose an option',
+          border: InputBorder.none,
+          filled: true,
+          fillColor: ColorsConstants.inputTextfillColor,
+        ),
+        items: items.map((T item) {
+          return DropdownMenuItem<T>(
+            value: item,
+            child: Text(item.toString()),
+          );
+        }).toList(),
+        onChanged: (T? value) {
+          selectedValue(value ?? defaultValue);
+        },
+      ),
     );
   }
 }

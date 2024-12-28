@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddCarViewModel extends ChangeNotifier {
   final List<int> yearsList = List.generate(
@@ -32,6 +33,7 @@ class AddCarViewModel extends ChangeNotifier {
   String? selectedTransmission;
   String? selectedFuelType;
   int? selectedYear;
+  XFile? selectedImage;
 
   AddCarViewModel();
 
@@ -47,6 +49,11 @@ class AddCarViewModel extends ChangeNotifier {
 
   void setSelectedYear(int? value) {
     selectedYear = value;
+    notifyListeners();
+  }
+
+  void setSelectedImage(XFile? value) {
+    selectedImage = value;
     notifyListeners();
   }
 }
