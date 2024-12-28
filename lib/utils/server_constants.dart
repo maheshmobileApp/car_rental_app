@@ -5,5 +5,6 @@ class ServerConstants {
   static const String signIn = "students/login";
   static const String addCar = "api/cars/add/";
   static const String bookACar = "api/book";
+  static const String getBookedCars = "api/bookings/";
 
 }
