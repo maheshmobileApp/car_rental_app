@@ -1,10 +1,13 @@
 
 import 'package:car_rental_app/features/cars/model/cars_model.dart';
+import 'package:car_rental_app/widget/button_widget.dart';
 import 'package:car_rental_app/widget/cache_network_image_widget.dart';
 import 'package:flutter/material.dart';
 class CarsCardWidget extends StatelessWidget {
-const CarsCardWidget({super.key, required this.carData});
+const CarsCardWidget(
+      {super.key, required this.carData, required this.bookingAction});
 final Cars carData;
+final Function() bookingAction;
 
 
   @override
@@ -12,6 +15,7 @@ final Cars carData;
     return Card(
       color: Colors.white,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -62,7 +66,12 @@ final Cars carData;
               )
             ],
           )
-         
+        ,
+          SizedBox(
+              width: 150,
+              child: ButtonWidget(buttonTitle: "Book Now", onPressed: () {
+                bookingAction();
+              })) 
         ],
       ),
     );

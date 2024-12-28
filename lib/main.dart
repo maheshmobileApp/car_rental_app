@@ -1,5 +1,7 @@
 import 'package:car_rental_app/features/add_car/repository/add_car_repository_impl.dart';
 import 'package:car_rental_app/features/add_car/view_model/add_car_view_model.dart';
+import 'package:car_rental_app/features/bookings/repository/booking_repository_impl.dart';
+import 'package:car_rental_app/features/bookings/view_model/bookin_view_model.dart';
 import 'package:car_rental_app/features/cars/repository/car_repository_impl.dart';
 import 'package:car_rental_app/features/cars/view_model/cars_view_model.dart';
 import 'package:car_rental_app/features/login/repository/login_repository_impl.dart';
@@ -42,6 +44,10 @@ class MyApp extends StatelessWidget {
 
         ChangeNotifierProvider(
             create: (_) => AddCarViewModel(repository: AddCarRepositoryImpl())),
+        ChangeNotifierProvider(
+            create: (_) =>
+                BookingViewModel(repository: BookingRepositoryImpl())),
+
       ],
      
       child: MaterialApp.router(
